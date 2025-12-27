@@ -1,5 +1,11 @@
 # WNS Test - Enzo Geron
 
+## Resumen
+
+Este proyecto procesa tres archivos de entrada (recetas en formato .md, precios de productos en .pdf y .xlsx), normaliza los datos y los almacena en SQLite.
+Luego, se expone un endpoint final `/quote` que calcula el costo total de una receta para una fecha determinada, aplicando la regla de "comprar múltiplos de 250 gramos" y utilizando la API de tipo de cambio proporcionada.
+La interfaz de usuario mínima se realizo en Vite y consume los endpoints `/recipes` - `/quote`.
+
 ## Tools
 
 ```
@@ -66,7 +72,7 @@ npm run dev
 
 Defini implementar un servicio de preprocesamiento de los datos para que sea mas eficiente y facil la manipulacion de los mismos. Para hacerlo pense en el siguiente flujo:
 
-parsing -> extractors -> normalization -> repositories -> services -> API
+inputs -> parsing -> extractors -> normalization -> repositories (SQLite) -> services -> API -> UI
 
 parsing: en la carpeta app/core/parsing se implementaron parsers reutilizables para archivos .md, .pdf y .xlsx. La funcion de estos archivos es generar una representacion estructurada 
 
@@ -126,3 +132,25 @@ curl "http://localhost:8000/quote?recipe_id=1&date=2025-12-20"
 ## Frontend
 
 Es una app simple desarrollada con Vite, que se encarga de consultar los endpoints /recipes y /quote del backend para mostrar la informacion que necesita el usuario
+
+## Asunciones
+
+- Los precios en .pdf/.xlsx se mantienen constantes durante el mes y se redonde al siguiente multiplo de 250g (como se indica en el reto)
+- La coincidencia de ingredientes se basa en nombres normalizados (por ejemplo "Morrón" → "morron")
+
+## Limitaciones
+
+- El analisis de PDF depende de la calidad de la extraccion de texto de la libreria `pdfplumber`
+- Se utiliza SQLite para simplificar el proceso de ingesta de datos
+
+## Fortalezas y debilidades
+
+- Como fortaleza creo que la arquitectura que implemente de (análisis/extracción/normalización/persistencia/servicios) permite reutilización. Tambien la separación entre la lógica del dominio y los servicios hace  que sea facil realizar modificaciones
+
+- Como debilidad creo que la correspondencia entre ingredientes y precios al basarse en normalización de texto puede no ser lo ideal, por lo que buscaria extender esto a un enfoque mas robusto. En relacion a rendimiento si bien ahora los archivos que se procesan no son muy grandes, creo que deberia considerar este caso para optimizar algunas funciones
+
+## Escalabilidad
+
+Para llevar esta aplicacion a un entorno productivo, cambiaría SQLite por otra base de datos como PostgreSQL, añadiria gestion de migraciones para controlar los cambios que se hacen en la DB. La ingesta de datos me parece que seria mejor que se ejecute como un trabajo en segundo plano en lugar de un endpoint manual
+
+Tambien agregaria autenticación/autorización y gestión centralizada de errores con observabilidad usando un middleware que asigne un request-id a cada solicitud para que sea mas facil buscar errores, por ultimo implementar CI/CD tambien seria muy bueno sobre todo tener mas tests unitarios/integracion
