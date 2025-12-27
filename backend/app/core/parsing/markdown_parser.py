@@ -35,9 +35,15 @@ class MarkdownParser(Parser[MarkdownDocument]):
             if m:
                 if current is not None:
                     sections.append(current)
+
                 level = len(m.group("hashes"))
                 title = m.group("title").strip()
-                current = MarkdownSection(level=level, title=title, lines=[])
+
+                current = MarkdownSection(
+                    level=level,
+                    title=title,
+                    lines=[]
+                )
             else:
                 if current is not None:
                     current.lines.append(line)

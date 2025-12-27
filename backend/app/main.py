@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 from app.api.routes.health import router as health_router
 from app.api.routes.ingest import router as ingest_router
@@ -7,7 +8,11 @@ from app.api.routes.recipe_ingredients import router as recipe_ingredients_route
 from app.api.routes.recipes import router as recipes_router
 from app.db.init_db import init_db
 
-app = FastAPI(title="WNS Test API")
+
+class UTF8JSONResponse(JSONResponse):
+    media_type = "application/json; charset=utf-8"
+
+app = FastAPI(title="WNS Test API", default_response_class=UTF8JSONResponse)
 
 @app.on_event("startup")
 async def startup():
