@@ -59,12 +59,12 @@ class IngestService:
 
         for p in produce_prices:
             norm = normalize_text(p.item_raw)
-            await self.price_repo.upsert_price(session, p.item_raw, norm, p.ars_per_kg)
+            await self.price_repo.upsert_price(session, p.item_raw, norm, p.cost_per_kg)
             prices_count += 1
 
         for p in xlsx_prices:
             norm = normalize_text(p.item_raw)
-            await self.price_repo.upsert_price(session, p.item_raw, norm, p.ars_per_kg)
+            await self.price_repo.upsert_price(session, p.item_raw, norm, p.cost_per_kg)
             prices_count += 1
 
         return {

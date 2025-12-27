@@ -24,7 +24,7 @@ def test_extract_prices_from_pdf_lines():
     ])
 
     items = extract_prices_from_pdf_text(doc)
-    by_name = {i.item_raw: i.ars_per_kg for i in items}
+    by_name = {i.item_raw: i.cost_per_kg for i in items}
 
     assert by_name["Tomate"] == 1200
     assert by_name["Lechuga"] == 800

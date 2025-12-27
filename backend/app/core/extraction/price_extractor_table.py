@@ -69,7 +69,7 @@ def extract_prices_from_excel_tables(xlsx_doc: ExcelDocument) -> List[PriceItem]
                 out.append(
                     PriceItem(
                         item_raw=name_raw,
-                        ars_per_kg=price_val
+                        cost_per_kg=price_val
                     )
                 )
 

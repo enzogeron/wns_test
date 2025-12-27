@@ -19,3 +19,13 @@ class RecipeRepository:
         await session.execute(delete(RecipeIngredient).where(RecipeIngredient.recipe_id == recipe_id))
         for ing in ingredients:
             session.add(ing)
+
+    async def get_recipe_by_id(self, session: AsyncSession, recipe_id: int) -> Recipe | None:
+        res = await session.execute(select(Recipe).where(Recipe.id == recipe_id))
+        return res.scalar_one_or_none()
+
+    async def list_ingredients(self, session: AsyncSession, recipe_id: int) -> list[RecipeIngredient]:
+        res = await session.execute(
+            select(RecipeIngredient).where(RecipeIngredient.recipe_id == recipe_id)
+        )
+        return list(res.scalars().all())

@@ -34,4 +34,4 @@ class Price(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     item_name_raw: Mapped[str] = mapped_column(String, nullable=False)
     item_name_norm: Mapped[str] = mapped_column(String, nullable=False)
-    ars_per_kg: Mapped[float] = mapped_column(Float, nullable=False)
+    cost_per_kg: Mapped[float] = mapped_column(Float, nullable=False)

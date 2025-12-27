@@ -40,3 +40,41 @@ Se expusieron endpoints para:
 - consulta de recetas -> GET /recipes)
 - consulta de ingredientes -> GET /recipes/{recipe_id}/ingredients
 - consulta de precios -> GET /prices
+
+## CURLs
+
+Health Check
+
+```
+curl http://localhost:8000/health
+```
+
+Ingestion de datos
+
+```
+curl -X POST http://localhost:8000/ingest
+```
+
+Listar recetas
+
+```
+curl http://localhost:8000/recipes
+```
+
+Obtener receta por ID
+
+```
+curl http://localhost:8000/recipes/1
+```
+
+Listar precios
+
+```
+curl http://localhost:8000/prices
+```
+
+Cotizar receta
+
+```
+curl "http://localhost:8000/quote?recipe_id=1&date=2025-12-20"
+```

@@ -39,7 +39,7 @@ def test_extract_prices_from_multiple_columns():
         "Pejerrey",
     ]
 
-    prices = {i.item_raw: i.ars_per_kg for i in items}
+    prices = {i.item_raw: i.cost_per_kg for i in items}
     assert prices["Asado de tira"] == 6800
     assert prices["Merluza fresca"] == 5000
     assert prices["Pechuga"] == 3800

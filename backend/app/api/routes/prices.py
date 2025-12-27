@@ -18,7 +18,7 @@ async def list_prices(
         {
             "item_raw": p.item_name_raw,
             "item_norm": p.item_name_norm,
-            "ars_per_kg": p.ars_per_kg,
+            "cost_per_kg": p.cost_per_kg,
         }
         for p in items
     ]

@@ -54,7 +54,7 @@ def extract_prices_from_pdf_text(
             items.append(
                 PriceItem(
                     item_raw=name,
-                    ars_per_kg=price
+                    cost_per_kg=price
                 )
             )
 

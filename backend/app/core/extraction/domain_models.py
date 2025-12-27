@@ -17,4 +17,4 @@ class Recipe:
 @dataclass(frozen=True)
 class PriceItem:
     item_raw: str
-    ars_per_kg: float
+    cost_per_kg: float
