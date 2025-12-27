@@ -5,9 +5,13 @@
 ```
 Python -> v3.11.7
 FastAPI -> v0.115.6
+Node -> v24.11.1
+NPM -> v11.6.2
 ```
 
 ## Ejecucion
+
+Se puede ejecutar el backend siguiendo estos pasos
 
 ```
 cd ./backend
@@ -16,6 +20,15 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Se puede ejecutar el frontend siguiendo estos pasos
+
+```
+cd ./frontend
+npm install
+
+npm run dev
 ```
 
 ## Implementacion
@@ -78,3 +91,7 @@ Cotizar receta
 ```
 curl "http://localhost:8000/quote?recipe_id=1&date=2025-12-20"
 ```
+
+## Frontend
+
+Es una app simple desarrollada con Vite, que se encarga de consultar los endpoints /recipes y /quote del backend para mostrar la informacion que necesita el usuario
