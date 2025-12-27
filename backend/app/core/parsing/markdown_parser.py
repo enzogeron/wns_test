@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from typing import List, Optional
 
+from app.config import settings
 from app.core.parsing.base import Parser
 from app.core.parsing.types import DocumentMeta
 
@@ -23,7 +24,7 @@ class MarkdownParser(Parser[MarkdownDocument]):
     def parse(self, path: str, source_name: Optional[str] = None) -> MarkdownDocument:
         meta = self._meta(path, source_name, "MarkdownParser")
 
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding=settings.text_encoding) as f:
             lines = f.read().splitlines()
 
         sections: List[MarkdownSection] = []

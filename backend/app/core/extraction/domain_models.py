@@ -12,6 +12,7 @@ class IngredientRequirement:
 class Recipe:
     name: str
     ingredients: List[IngredientRequirement]
+    instructions: str = ""
 
 @dataclass(frozen=True)
 class PriceItem:

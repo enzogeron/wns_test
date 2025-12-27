@@ -3,7 +3,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     input_dir: str = "../inputs"
-    
+    text_encoding: str = "utf-8-sig"
+
     data_dir: str = "./data"
     db_url: str = "sqlite+aiosqlite:///./data/app.db"
 

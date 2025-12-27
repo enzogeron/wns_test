@@ -8,7 +8,8 @@ class Base(DeclarativeBase):
 class Recipe(Base):
     __tablename__ = "recipes"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String, unique=True, index=True)  # en este challenge alcanza
+    name: Mapped[str] = mapped_column(String, unique=True, index=True)
+    instructions: Mapped[str] = mapped_column(String)
 
 class RecipeIngredient(Base):
     __tablename__ = "recipe_ingredients"

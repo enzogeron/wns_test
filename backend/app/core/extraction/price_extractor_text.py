@@ -17,13 +17,13 @@ def extract_prices_from_pdf_text(
     pdf_doc: PDFTextDocument
 ) -> List[PriceItem]:
     """
-    Extrae precios desde un PDF previamente convertido a texto.
+    Extrae precios desde un PDF previamente convertido a texto
 
     Estrategia general:
     - Recorremos pagina por pagina
     - Dividimos el texto en lineas
     - Aplicamos la expresion regular _PRICE_LINE_RE
-    - Convertimos el precio usando una función reutilizable.
+    - Convertimos el precio usando una función reutilizable
     """
 
     # Lista final de precios encontrados

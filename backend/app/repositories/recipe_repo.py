@@ -4,13 +4,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class RecipeRepository:
-    async def upsert_recipe(self, session: AsyncSession, name: str) -> Recipe:
+    async def upsert_recipe(self, session: AsyncSession, name: str, instructions: str) -> Recipe:
         res = await session.execute(select(Recipe).where(Recipe.name == name))
         recipe = res.scalar_one_or_none()
         if recipe:
             return recipe
 
-        recipe = Recipe(name=name)
+        recipe = Recipe(name=name, instructions=instructions)
         session.add(recipe)
         await session.flush()
         return recipe

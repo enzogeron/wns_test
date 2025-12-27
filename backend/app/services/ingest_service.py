@@ -40,7 +40,7 @@ class IngestService:
         prices_count = 0
 
         for r in recipes:
-            recipe = await self.recipe_repo.upsert_recipe(session, r.name)
+            recipe = await self.recipe_repo.upsert_recipe(session, r.name, r.instructions)
             recipes_count += 1
 
             ing_entities = []

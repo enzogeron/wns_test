@@ -11,4 +11,4 @@ router = APIRouter()
 async def list_recipes(session: AsyncSession = Depends(get_session)):
     res = await session.execute(select(Recipe).order_by(Recipe.name))
     recipes = res.scalars().all()
-    return [{"id": r.id, "name": r.name} for r in recipes]
+    return [{"id": r.id, "name": r.name, "instructions": r.instructions} for r in recipes]
