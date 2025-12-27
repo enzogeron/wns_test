@@ -1,9 +1,10 @@
 import type { Quote, Recipe } from "./types";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
 
 async function http<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`);
+  const res = await fetch(`${API_BASE_URL}${path}`);
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`HTTP ${res.status} - ${text}`);

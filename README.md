@@ -3,15 +3,46 @@
 ## Tools
 
 ```
+Para backend
 Python -> v3.11.7
 FastAPI -> v0.115.6
-Node -> v24.11.1
+
+Para frontend
+Node -> v20.11.1
 NPM -> v11.6.2
 ```
 
 ## Ejecucion
 
-Se puede ejecutar el backend siguiendo estos pasos
+Se esta usando Docker para ejecutar de forma facil ambos proyectos
+
+En el mismo directorio donde se encuentra el archivo docker-compose.yml
+
+Ejecutar el comando
+
+```
+docker compose up --build
+
+# para ver logs
+docker compose logs
+
+# detener servicios
+docker compose down
+```
+
+Cuando terminen de descargarse las dependencias se deberia ver algo como la siguiente imagen
+
+![alt text](image.png)
+
+Es necesario ejecutar el proceso de ingesta de datos la primera vez para que el frontend tenga informacion que mostrar. Desde la terminal o postman ejecutar:
+
+```
+curl -X POST http://localhost:8000/ingest
+```
+
+URL Frontend: http://localhost:5173/
+
+Se puede ejecutar el backend de forma manual siguiendo estos pasos
 
 ```
 cd ./backend
@@ -22,7 +53,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Se puede ejecutar el frontend siguiendo estos pasos
+Se puede ejecutar el frontend de forma manual siguiendo estos pasos
 
 ```
 cd ./frontend

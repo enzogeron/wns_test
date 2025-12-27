@@ -8,6 +8,7 @@ from app.api.routes.prices import router as prices_router
 from app.api.routes.quote import router as quote_router
 from app.api.routes.recipe_ingredients import router as recipe_ingredients_router
 from app.api.routes.recipes import router as recipes_router
+from app.config import settings
 from app.db.init_db import init_db
 
 
@@ -17,9 +18,10 @@ class UTF8JSONResponse(JSONResponse):
 app = FastAPI(title="WNS Test API", default_response_class=UTF8JSONResponse)
 
 # Fix CORS
+origins = getattr(settings, "cors_origins", ["http://localhost:5173"])
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

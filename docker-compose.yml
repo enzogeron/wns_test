@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: ./backend
+    container_name: wns_api
+    ports:
+      - "8000:8000"
+    environment:
+      - INPUT_DIR=/app/inputs
+      - DATA_DIR=/app/data
+      - DB_URL=sqlite+aiosqlite:////app/data/app.db
+      - TEXT_ENCODING=utf-8
+      - CORS_ORIGINS=["http://localhost:5173"]
+    volumes:
+      - ./inputs:/app/inputs:ro
+      - ./data:/app/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+    container_name: wns_web
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    depends_on:
+      - api
+    restart: unless-stopped
